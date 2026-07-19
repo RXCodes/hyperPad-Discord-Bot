@@ -1,6 +1,6 @@
 ## Goal
 
-The goal of this project is to better moderate the hyperPad discord server while also providing additional services. The source code of this repository will be kept public for complete transparency and is free to reuse to better serve other Discord servers.
+The goal of this project is to better moderate the hyperPad discord server while also providing additional services. The source code of this repository will be kept public for complete transparency and is free to reuse to better serve other Discord servers until further notice.
 
 ## Deployment
 
