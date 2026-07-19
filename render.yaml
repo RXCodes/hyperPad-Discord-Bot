@@ -1,6 +1,6 @@
 services:
   - type: web
-    name: express-hello-world
+    name: hyperpad-discord-bot
     runtime: node
     plan: free
     buildCommand: yarn install --frozen-lockfile
