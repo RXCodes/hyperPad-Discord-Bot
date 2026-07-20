@@ -8,7 +8,7 @@ const Enforced = true;
 // how many messages that can be sent before taking action
 const ThresholdTimes = 6;
 
-// the timeframe that a group of messages is considered spam
+// the timeframe that a group of messages (in seconds) is considered spam
 const DecayTime = 8;
 
 // the action to take on a user that violates this goal
