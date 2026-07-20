@@ -51,7 +51,6 @@ class ContentMarker {
 
     is_similar_to_message(message) {
         let result = levenshtein.get(message.content, this.message.content);
-        console.log(result);
         return result <= ThresholdLevenshteinDistance;
     }
 }
