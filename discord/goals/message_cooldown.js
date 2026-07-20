@@ -12,19 +12,24 @@ const ThresholdTimes = 6;
 const DecayTime = 8;
 
 // the action to take on a user that violates this goal
-function take_action(member) {
+function take_action(member, channel) {
     // delete the offending spam messages
     Helper.delete_messages(client_message_mapping[member.id]);
     client_message_mapping[member.id] = [];
 
-    // time out member for 2 minutes
-    member.timeout(1000 * 60 * 2, "You are sending too many messages too fast!")
+    // time out member for 5 minutes
+    member.timeout(1000 * 60 * 5, "You are sending too many messages too fast!")
+
+    // log this action
+    let user_mention = "<@" + member.id + ">";
+    let log = Helper.create_log("⚠️ User Timed Out", user_mention + " sent too many messages too fast!", Colors.warn, member);
+    Helper.send_log(log, member.guild, channel);
 }
 
 // ******************************************************************
 
 import { DiscordClient } from "../../foundation/discord_bot.js";
-import { Helper } from "../helpers.js";
+import { Colors, Helper } from "../helpers.js";
 import Discord from "discord.js";
 const client_message_mapping = {};
 const GOAL_NAME = "Message Cooldown";
@@ -50,7 +55,7 @@ if (Enforced) {
         client_message_mapping[message.author.id] = user_messages;
         refresh_message_mapping();
         if (client_message_mapping[message.author.id].length > ThresholdTimes) {
-            take_action(message.member);
+            take_action(message.member, message.channel);
         }
     });
 }
