@@ -1,5 +1,6 @@
 // ******************************************************************
 // GOAL: don't let user send their job applications/resume over chat
+// searches for flags that are often in job postings and blocks them if too many flags are found
 
 // whether this goal is enforced or not - set false to disable
 const Enforced = true;
@@ -383,10 +384,10 @@ if (Enforced) {
         }
 
         // normalize the text for analysis
-        var normalized_message = HomoglyphMapHelper.normalize_text(message.content);
+        const normalized_message = HomoglyphMapHelper.normalize_text(message.content);
 
         // search for flags
-        var flags_counted = 0;
+        let flags_counted = 0;
         for (const flag_list of Flags) {
             for (const flag of flag_list) {
                 let occurrences = normalized_message.split(flag).length - 1;
