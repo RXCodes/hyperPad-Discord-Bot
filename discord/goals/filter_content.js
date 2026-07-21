@@ -8,6 +8,9 @@ const Enforced = true;
 // list of things that should NEVER be said in ANY context
 import { SevereFilterList } from "../filter_lists/Severe.js";
 
+// list of things that makes a message look like a scam
+import { PotentialScamsFilterList } from "../filter_lists/PotentialScams.js";
+
 // list of all filters to use along with their settings
 const Filters = [
     {
@@ -17,6 +20,15 @@ const Filters = [
         logTitle: "⚠️ User Timed Out",
         logDescription: "[@USER] sent a message that contained content that violated server rules.",
         userReason: "You sent a message that contained content that violated server rules.",
+        color: Colors.warn
+    },
+    {
+        name: "Scam Filter",
+        list: PotentialScamsFilterList,
+        timeoutTime: 60 * 10,
+        logTitle: "⚠️ User Timed Out",
+        logDescription: "[@USER] sent a message that looks like a potential scam.",
+        userReason: "You sent a message that looked deceptive. Scams are not tolerated.",
         color: Colors.warn
     }
 ];
