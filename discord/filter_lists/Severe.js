@@ -1,345 +1,345 @@
 // taken from https://github.com/LDNOOBW/List-of-Dirty-Naughty-Obscene-and-Otherwise-Bad-Words
-const string_list = "2g1c\n" +
-    "2 girls 1 cup\n" +
-    "acrotomophilia\n" +
-    "alabama hot pocket\n" +
-    "alaskan pipeline\n" +
-    "anal\n" +
-    "anilingus\n" +
-    "apeshit\n" +
-    "arsehole\n" +
-    "asshole\n" +
-    "assmunch\n" +
-    "auto erotic\n" +
-    "autoerotic\n" +
-    "babeland\n" +
-    "baby batter\n" +
-    "baby juice\n" +
-    "ball gag\n" +
-    "ball gravy\n" +
-    "ball kicking\n" +
-    "ball licking\n" +
-    "ball sack\n" +
-    "ball sucking\n" +
-    "bangbros\n" +
-    "bangbus\n" +
-    "bareback\n" +
-    "barenaked\n" +
-    "bastardo\n" +
-    "bastinado\n" +
-    "bbw\n" +
-    "bdsm\n" +
-    "beaner\n" +
-    "beaners\n" +
-    "beaver cleaver\n" +
-    "beaver lips\n" +
-    "beastiality\n" +
-    "bestiality\n" +
-    "big black\n" +
-    "big breasts\n" +
-    "big knockers\n" +
-    "big tits\n" +
-    "bimbos\n" +
-    "birdlock\n" +
-    "bitch\n" +
-    "bitches\n" +
-    "black cock\n" +
-    "blonde action\n" +
-    "blonde on blonde action\n" +
-    "blowjob\n" +
-    "blow job\n" +
-    "blow your load\n" +
-    "blue waffle\n" +
-    "blumpkin\n" +
-    "bollocks\n" +
-    "bondage\n" +
-    "boner\n" +
-    "boob\n" +
-    "boobs\n" +
-    "booty call\n" +
-    "brown showers\n" +
-    "brunette action\n" +
-    "bukkake\n" +
-    "bulldyke\n" +
-    "bullet vibe\n" +
-    "bung hole\n" +
-    "bunghole\n" +
-    "camel toe\n" +
-    "camgirl\n" +
-    "camslut\n" +
-    "camwhore\n" +
-    "carpet muncher\n" +
-    "carpetmuncher\n" +
-    "chocolate rosebuds\n" +
-    "cialis\n" +
-    "circlejerk\n" +
-    "cleveland steamer\n" +
-    "clit\n" +
-    "clitoris\n" +
-    "clover clamps\n" +
-    "clusterfuck\n" +
-    "coprolagnia\n" +
-    "coprophilia\n" +
-    "coon\n" +
-    "coons\n" +
-    "creampie\n" +
-    "cum\n" +
-    "cumming\n" +
-    "cumshot\n" +
-    "cumshots\n" +
-    "cunnilingus\n" +
-    "cunt\n" +
-    "darkie\n" +
-    "date rape\n" +
-    "daterape\n" +
-    "deep throat\n" +
-    "deepthroat\n" +
-    "dendrophilia\n" +
-    "dick\n" +
-    "dildo\n" +
-    "dingleberry\n" +
-    "dingleberries\n" +
-    "dirty pillows\n" +
-    "dirty sanchez\n" +
-    "doggie style\n" +
-    "doggiestyle\n" +
-    "doggy style\n" +
-    "doggystyle\n" +
-    "dog style\n" +
-    "dolcett\n" +
-    "dominatrix\n" +
-    "dommes\n" +
-    "donkey punch\n" +
-    "double dong\n" +
-    "double penetration\n" +
-    "dp action\n" +
-    "dry hump\n" +
-    "dvda\n" +
-    "eat my ass\n" +
-    "eat my dick\n" +
-    "ecchi\n" +
-    "ejaculation\n" +
-    "eunuch\n" +
-    "fag\n" +
-    "faggot\n" +
-    "felch\n" +
-    "fellatio\n" +
-    "feltch\n" +
-    "female squirting\n" +
-    "femdom\n" +
-    "figging\n" +
-    "fingerbang\n" +
-    "fingering\n" +
-    "fisting\n" +
-    "foot fetish\n" +
-    "footjob\n" +
-    "frotting\n" +
-    "fuck buttons\n" +
-    "fucktards\n" +
-    "fuck you\n" +
-    "fudge packer\n" +
-    "fudgepacker\n" +
-    "futanari\n" +
-    "gangbang\n" +
-    "gang bang\n" +
-    "gay sex\n" +
-    "genitals\n" +
-    "giant cock\n" +
-    "girl on\n" +
-    "girl on top\n" +
-    "girls gone wild\n" +
-    "goatcx\n" +
-    "goatse\n" +
-    "gokkun\n" +
-    "goodpoop\n" +
-    "goo girl\n" +
-    "goregasm\n" +
-    "grope\n" +
-    "group sex\n" +
-    "g-spot\n" +
-    "guro\n" +
-    "hand job\n" +
-    "handjob\n" +
-    "hentai\n" +
-    "homoerotic\n" +
-    "honkey\n" +
-    "hooker\n" +
-    "horny\n" +
-    "hot carl\n" +
-    "hot chick\n" +
-    "humping\n" +
-    "incest\n" +
-    "intercourse\n" +
-    "jack off\n" +
-    "jail bait\n" +
-    "jailbait\n" +
-    "jelly donut\n" +
-    "jerk off\n" +
-    "jigaboo\n" +
-    "jiggaboo\n" +
-    "jiggerboo\n" +
-    "jizz\n" +
-    "juggs\n" +
-    "kike\n" +
-    "kinbaku\n" +
-    "kinkster\n" +
-    "kinky\n" +
-    "knobbing\n" +
-    "leather restraint\n" +
-    "leather straight jacket\n" +
-    "lemon party\n" +
-    "livesex\n" +
-    "lolita\n" +
-    "lovemaking\n" +
-    "make me cum\n" +
-    "male squirting\n" +
-    "masturbate\n" +
-    "masturbating\n" +
-    "masturbation\n" +
-    "menage a trois\n" +
-    "milf\n" +
-    "missionary position\n" +
-    "mong\n" +
-    "motherfucker\n" +
-    "mound of venus\n" +
-    "mr hands\n" +
-    "muff diver\n" +
-    "muffdiving\n" +
-    "nambla\n" +
-    "nawashi\n" +
-    "neonazi\n" +
-    "nigga\n" +
-    "niggas\n" +
-    "niggers\n" +
-    "nigger\n" +
-    "nig nog\n" +
-    "nimphomania\n" +
-    "nutten\n" +
-    "nympho\n" +
-    "nymphomania\n" +
-    "octopussy\n" +
-    "omorashi\n" +
-    "one cup two girls\n" +
-    "one guy one jar\n" +
-    "orgasm\n" +
-    "orgy\n" +
-    "paedophile\n" +
-    "paki\n" +
-    "panties\n" +
-    "panty\n" +
-    "pedobear\n" +
-    "pedophile\n" +
-    "penis\n" +
-    "phone sex\n" +
-    "piece of shit\n" +
-    "piss pig\n" +
-    "pisspig\n" +
-    "playboy\n" +
-    "pleasure chest\n" +
-    "pole smoker\n" +
-    "ponyplay\n" +
-    "poon\n" +
-    "poontang\n" +
-    "punany\n" +
-    "poop chute\n" +
-    "poopchute\n" +
-    "porn\n" +
-    "porno\n" +
-    "pornography\n" +
-    "prince albert piercing\n" +
-    "pthc\n" +
-    "pubes\n" +
-    "pussy\n" +
-    "queaf\n" +
-    "queef\n" +
-    "raghead\n" +
-    "raging boner\n" +
-    "rape\n" +
-    "raping\n" +
-    "rapist\n" +
-    "reverse cowgirl\n" +
-    "rimjob\n" +
-    "rimming\n" +
-    "rosy palm\n" +
-    "rosy palm and her 5 sisters\n" +
-    "rusty trombone\n" +
-    "sadism\n" +
-    "santorum\n" +
-    "scat\n" +
-    "schlong\n" +
-    "scissoring\n" +
-    "semen\n" +
-    "sexcam\n" +
-    "sexo\n" +
-    "shaved beaver\n" +
-    "shaved pussy\n" +
-    "shemale\n" +
-    "shibari\n" +
-    "shitblimp\n" +
-    "shota\n" +
-    "shrimping\n" +
-    "skeet\n" +
-    "slanteye\n" +
-    "slut\n" +
-    "s&m\n" +
-    "sodomize\n" +
-    "sodomy\n" +
-    "spastic\n" +
-    "splooge\n" +
-    "splooge moose\n" +
-    "spooge\n" +
-    "spread legs\n" +
-    "strapon\n" +
-    "strappado\n" +
-    "strip club\n" +
-    "style doggy\n" +
-    "suicide girls\n" +
-    "sultry women\n" +
-    "swastika\n" +
-    "swinger\n" +
-    "threesome\n" +
-    "throating\n" +
-    "thumbzilla\n" +
-    "tight white\n" +
-    "titties\n" +
-    "titty\n" +
-    "tongue in a\n" +
-    "tosser\n" +
-    "towelhead\n" +
-    "tranny\n" +
-    "tribadism\n" +
-    "tub girl\n" +
-    "tubgirl\n" +
-    "tushy\n" +
-    "twat\n" +
-    "twink\n" +
-    "two girls one cup\n" +
-    "undress me\n" +
-    "urethra play\n" +
-    "urophilia\n" +
-    "vagina\n" +
-    "venus mound\n" +
-    "viagra\n" +
-    "vibrator\n" +
-    "violet wand\n" +
-    "vorarephilia\n" +
-    "voyeur\n" +
-    "voyeurweb\n" +
-    "voyuer\n" +
-    "vulva\n" +
-    "wank\n" +
-    "wetback\n" +
-    "wet dream\n" +
-    "white power\n" +
-    "whore\n" +
-    "worldsex\n" +
-    "wrapping men\n" +
-    "wrinkled starfish\n" +
-    "xx\n" +
-    "xxx\n" +
-    "yaoi\n" +
-    "yellow showers\n" +
-    "yiffy\n" +
-    "zoophilia";
-
-export var SevereFilterList = string_list.split("\n");
+export var SevereFilterList = [
+    "2g1c",
+    "2 girls 1 cup",
+    "acrotomophilia",
+    "alabama hot pocket",
+    "alaskan pipeline",
+    "anal",
+    "anilingus",
+    "apeshit",
+    "arsehole",
+    "asshole",
+    "assmunch",
+    "auto erotic",
+    "autoerotic",
+    "babeland",
+    "baby batter",
+    "baby juice",
+    "ball gag",
+    "ball gravy",
+    "ball kicking",
+    "ball licking",
+    "ball sack",
+    "ball sucking",
+    "bangbros",
+    "bangbus",
+    "bareback",
+    "barenaked",
+    "bastardo",
+    "bastinado",
+    "bbw",
+    "bdsm",
+    "beaner",
+    "beaners",
+    "beaver cleaver",
+    "beaver lips",
+    "beastiality",
+    "bestiality",
+    "big black",
+    "big breasts",
+    "big knockers",
+    "big tits",
+    "bimbos",
+    "birdlock",
+    "bitch",
+    "bitches",
+    "black cock",
+    "blonde action",
+    "blonde on blonde action",
+    "blowjob",
+    "blow job",
+    "blow your load",
+    "blue waffle",
+    "blumpkin",
+    "bollocks",
+    "bondage",
+    "boner",
+    "boob",
+    "boobs",
+    "booty call",
+    "brown showers",
+    "brunette action",
+    "bukkake",
+    "bulldyke",
+    "bullet vibe",
+    "bung hole",
+    "bunghole",
+    "camel toe",
+    "camgirl",
+    "camslut",
+    "camwhore",
+    "carpet muncher",
+    "carpetmuncher",
+    "chocolate rosebuds",
+    "cialis",
+    "circlejerk",
+    "cleveland steamer",
+    "clit",
+    "clitoris",
+    "clover clamps",
+    "clusterfuck",
+    "coprolagnia",
+    "coprophilia",
+    "coon",
+    "coons",
+    "creampie",
+    "cum",
+    "cumming",
+    "cumshot",
+    "cumshots",
+    "cunnilingus",
+    "cunt",
+    "darkie",
+    "date rape",
+    "daterape",
+    "deep throat",
+    "deepthroat",
+    "dendrophilia",
+    "dick",
+    "dildo",
+    "dingleberry",
+    "dingleberries",
+    "dirty pillows",
+    "dirty sanchez",
+    "doggie style",
+    "doggiestyle",
+    "doggy style",
+    "doggystyle",
+    "dog style",
+    "dolcett",
+    "dominatrix",
+    "dommes",
+    "donkey punch",
+    "double dong",
+    "double penetration",
+    "dp action",
+    "dry hump",
+    "dvda",
+    "eat my ass",
+    "eat my dick",
+    "ecchi",
+    "ejaculation",
+    "eunuch",
+    "fag",
+    "faggot",
+    "felch",
+    "fellatio",
+    "feltch",
+    "female squirting",
+    "femdom",
+    "figging",
+    "fingerbang",
+    "fingering",
+    "fisting",
+    "foot fetish",
+    "footjob",
+    "frotting",
+    "fuck buttons",
+    "fucktards",
+    "fuck you",
+    "fudge packer",
+    "fudgepacker",
+    "futanari",
+    "gangbang",
+    "gang bang",
+    "gay sex",
+    "genitals",
+    "giant cock",
+    "girl on",
+    "girl on top",
+    "girls gone wild",
+    "goatcx",
+    "goatse",
+    "gokkun",
+    "goodpoop",
+    "goo girl",
+    "goregasm",
+    "grope",
+    "group sex",
+    "g-spot",
+    "guro",
+    "hand job",
+    "handjob",
+    "hentai",
+    "homoerotic",
+    "honkey",
+    "hooker",
+    "horny",
+    "hot carl",
+    "hot chick",
+    "humping",
+    "incest",
+    "intercourse",
+    "jack off",
+    "jail bait",
+    "jailbait",
+    "jelly donut",
+    "jerk off",
+    "jigaboo",
+    "jiggaboo",
+    "jiggerboo",
+    "jizz",
+    "juggs",
+    "kike",
+    "kinbaku",
+    "kinkster",
+    "kinky",
+    "knobbing",
+    "leather restraint",
+    "leather straight jacket",
+    "lemon party",
+    "livesex",
+    "lolita",
+    "lovemaking",
+    "make me cum",
+    "male squirting",
+    "masturbate",
+    "masturbating",
+    "masturbation",
+    "menage a trois",
+    "milf",
+    "missionary position",
+    "mong",
+    "motherfucker",
+    "mound of venus",
+    "mr hands",
+    "muff diver",
+    "muffdiving",
+    "nambla",
+    "nawashi",
+    "neonazi",
+    "nigga",
+    "niggas",
+    "niggers",
+    "nigger",
+    "nig nog",
+    "nimphomania",
+    "nutten",
+    "nympho",
+    "nymphomania",
+    "octopussy",
+    "omorashi",
+    "one cup two girls",
+    "one guy one jar",
+    "orgasm",
+    "orgy",
+    "paedophile",
+    "paki",
+    "panties",
+    "panty",
+    "pedobear",
+    "pedophile",
+    "penis",
+    "phone sex",
+    "piece of shit",
+    "piss pig",
+    "pisspig",
+    "playboy",
+    "pleasure chest",
+    "pole smoker",
+    "ponyplay",
+    "poon",
+    "poontang",
+    "punany",
+    "poop chute",
+    "poopchute",
+    "porn",
+    "porno",
+    "pornography",
+    "prince albert piercing",
+    "pthc",
+    "pubes",
+    "pussy",
+    "queaf",
+    "queef",
+    "raghead",
+    "raging boner",
+    "rape",
+    "raping",
+    "rapist",
+    "reverse cowgirl",
+    "rimjob",
+    "rimming",
+    "rosy palm",
+    "rosy palm and her 5 sisters",
+    "rusty trombone",
+    "sadism",
+    "santorum",
+    "scat",
+    "schlong",
+    "scissoring",
+    "semen",
+    "sexcam",
+    "sexo",
+    "shaved beaver",
+    "shaved pussy",
+    "shemale",
+    "shibari",
+    "shitblimp",
+    "shota",
+    "shrimping",
+    "skeet",
+    "slanteye",
+    "slut",
+    "s&m",
+    "sodomize",
+    "sodomy",
+    "spastic",
+    "splooge",
+    "splooge moose",
+    "spooge",
+    "spread legs",
+    "strapon",
+    "strappado",
+    "strip club",
+    "style doggy",
+    "suicide girls",
+    "sultry women",
+    "swastika",
+    "swinger",
+    "threesome",
+    "throating",
+    "thumbzilla",
+    "tight white",
+    "titties",
+    "titty",
+    "tongue in a",
+    "tosser",
+    "towelhead",
+    "tranny",
+    "tribadism",
+    "tub girl",
+    "tubgirl",
+    "tushy",
+    "twat",
+    "twink",
+    "two girls one cup",
+    "undress me",
+    "urethra play",
+    "urophilia",
+    "vagina",
+    "venus mound",
+    "viagra",
+    "vibrator",
+    "violet wand",
+    "vorarephilia",
+    "voyeur",
+    "voyeurweb",
+    "voyuer",
+    "vulva",
+    "wank",
+    "wetback",
+    "wet dream",
+    "white power",
+    "whore",
+    "worldsex",
+    "wrapping men",
+    "wrinkled starfish",
+    "xx",
+    "xxx",
+    "yaoi",
+    "yellow showers",
+    "yiffy",
+    "zoophilia"
+];
