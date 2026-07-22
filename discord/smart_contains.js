@@ -22,17 +22,18 @@ function tokens_are_similar(source_token, search_token) {
         return false;
     }
 
-    // if the phones match, they're definitely the same word
+    // if the phones match, they're probably the same word
     let source_phones = RiTa.phones(source_token, { silent: true });
     let search_phones = RiTa.phones(search_token, { silent: true });
     if (search_phones.length < 3) {
         return false;
     }
-    if (search_phones === source_phones) {
-        return true;
-    }
-    if (source_phones.length >= 10 && search_phones.startsWith(source_phones)) {
-        return true;
+    if (search_phones === source_phones || source_phones.length >= 10 && search_phones.startsWith(source_phones)) {
+        // if the phones match, check letter sequences
+        // these sequences don't contain two same characters in a row: boom --> bom
+        const search_letter_sequence = search_token.replace(/(.)\1+/g, '$1');
+        const source_letter_sequence = source_token.replace(/(.)\1+/g, '$1');
+        return search_letter_sequence.startsWith(source_letter_sequence);
     }
 
     // look at the syllables - simplify them if possible
@@ -50,7 +51,14 @@ function tokens_are_similar(source_token, search_token) {
     search_syllables = search_syllables.replace("iy-eh-r", "er");
     search_syllables = search_syllables.replace("uw-uw-", "uw-");
     search_syllables = search_syllables.replace("iy-n", "eh-n");
-    return search_syllables === source_phones;
+    if (search_syllables === source_phones) {
+        // if the syllables match, check letter sequences
+        // these sequences don't contain two same characters in a row: boom --> bom
+        const search_letter_sequence = search_token.replace(/(.)\1+/g, '$1');
+        const source_letter_sequence = source_token.replace(/(.)\1+/g, '$1');
+        return search_letter_sequence.startsWith(source_letter_sequence);
+    }
+    return false;
 }
 
 // asynchronously determine if a text contains a subtext

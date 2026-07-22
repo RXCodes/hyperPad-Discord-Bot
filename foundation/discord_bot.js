@@ -1,10 +1,21 @@
+// run unit tests
+import fs from "fs";
+async function run_unit_tests() {
+    fs.readdir('./discord/unit_tests/', (err, files) => {
+        for (const file_path of files) {
+            if (file_path.endsWith('.js')) {
+                import("../discord/unit_tests/" + file_path);
+            }
+        }
+    });
+}
+run_unit_tests();
+
 // starts the discord bot
 let discord_token = process.env.DISCORD_TOKEN;
 if (!discord_token) {
     throw new Error('Discord token is not provided as an environment variable!');
 }
-import fs from "fs";
-import { fork } from 'child_process';
 
 import {Client, GatewayIntentBits} from 'discord.js';
 const client = new Client({
