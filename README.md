@@ -1,7 +1,7 @@
 ![Banner](https://raw.githubusercontent.com/RXCodes/Project-Spark/refs/heads/main/banner.jpg)
 
 ## 📌 Goal
-The goal of this project is to better moderate the hyperPad discord server while also providing additional services. The source code of this repository will be kept public for complete transparency and is free to reuse to better serve other Discord servers until further notice. Bots and malicious actors can join a server and cause havoc, which this aims project to prevent and minimize. Current implementations either do not work or are too sensitive - Spark allows fined-tuned controls and methods that fit with our server.
+The goal of this project is to better moderate the hyperPad discord server while also providing additional services. The source code of this repository will be kept public for complete transparency and is free to reuse to better serve other Discord servers until further notice. Bots and malicious actors can join a server and cause havoc, which this project aims to prevent and minimize. Current implementations either do not work or are too sensitive - Spark allows fined-tuned controls and methods that fit with our server.
 
 ## ✅ Current Capabilities
 Spark has a few **preprogrammed goals** as defined in `discord/goals/`. If a user violates a goal, Spark will take action on the user.
