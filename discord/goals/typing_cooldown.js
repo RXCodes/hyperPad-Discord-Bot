@@ -35,9 +35,8 @@ function take_action(member, channel) {
 
 // ******************************************************************
 
-import { DiscordClient } from "../../foundation/discord_bot.js";
+import { DiscordInteractionRouter } from "../interaction_router.js";
 import { Colors, Helper } from "../helpers.js";
-import Discord from "discord.js";
 const client_last_messages = {};
 const client_last_timestamp = {};
 const client_flags_mapping = {};
@@ -60,7 +59,7 @@ function refresh_message_mapping() {
 // as users send messages, track timestamps in client_last_timestamp
 if (Enforced) {
     console.log("Running Goal: " + GOAL_NAME);
-    DiscordClient.on(Discord.Events.MessageCreate, (message) => {
+    DiscordInteractionRouter.register_message_create_event(5, (message) => {
         if (message.author.bot) {
             return;
         }
@@ -94,7 +93,9 @@ if (Enforced) {
             client_flags.push(Date.now());
             if (client_flags.length >= ThresholdFlags) {
                 try {
-                    take_action(message.member, message.channel);
+                    if (DiscordInteractionRouter.request_action_on_message(message)) {
+                        take_action(message.member, message.channel);
+                    }
                 } catch (e) {}
             }
             client_flags_mapping[message.author.id] = client_flags;

@@ -28,9 +28,8 @@ function take_action(member, channel) {
 
 // ******************************************************************
 
-import { DiscordClient } from "../../foundation/discord_bot.js";
+import { DiscordInteractionRouter } from "../interaction_router.js";
 import { Colors, Helper } from "../helpers.js";
-import Discord from "discord.js";
 const client_message_mapping = {};
 const GOAL_NAME = "Message Cooldown";
 
@@ -46,7 +45,7 @@ function refresh_message_mapping() {
 // as users send messages, track them in client_message_mapping
 if (Enforced) {
     console.log("Running Goal: " + GOAL_NAME);
-    DiscordClient.on(Discord.Events.MessageCreate, (message) => {
+    DiscordInteractionRouter.register_message_create_event(10, (message) => {
         if (message.author.bot) {
             return;
         }
@@ -59,7 +58,9 @@ if (Enforced) {
         refresh_message_mapping();
         if (client_message_mapping[message.author.id].length > ThresholdTimes) {
             try {
-                take_action(message.member, message.channel);
+                if (DiscordInteractionRouter.request_action_on_message(message)) {
+                    take_action(message.member, message.channel);
+                }
             } catch (e) {}
         }
     });

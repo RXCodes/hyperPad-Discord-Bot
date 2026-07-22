@@ -12,7 +12,7 @@ function setup_filters(filters) {
     }
 }
 
-async function ingest_message(message) {
+function ingest_message(message) {
     // normalize the text for analysis
     let normalized_message = HomoglyphMapHelper.normalize_text(message.content);
 
@@ -29,7 +29,7 @@ async function ingest_message(message) {
                     parentPort.postMessage({
                         result: 'detected',
                         filter: filter_properties,
-                        message: message,
+                        message_id: message.id,
                         word: blocked_word
                     });
                     return;
@@ -41,7 +41,7 @@ async function ingest_message(message) {
                 parentPort.postMessage({
                     result: 'detected',
                     filter: filter_properties,
-                    message: message,
+                    message_id: message.id,
                     word: blocked_word
                 });
                 return;
@@ -52,12 +52,11 @@ async function ingest_message(message) {
 }
 
 parentPort.on('message', (message) => {
-    if (message.type == "setup_filters") {
+    if (message.type === "setup_filters") {
         setup_filters(message.filters);
         return;
     }
-    if (message.type == "ingest_message") {
+    if (message.type === "ingest_message") {
         ingest_message(message.message);
-        return;
     }
 });

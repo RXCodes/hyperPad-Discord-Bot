@@ -20,8 +20,8 @@ const PONG_RETURN_NORMAL_TIME = 60 * 20;
 
 // ******************************************************************
 
-import { DiscordClient } from "../../foundation/discord_bot.js";
 import { HomoglyphMapHelper } from "../homoglyph_map.js";
+import { DiscordInteractionRouter } from "../interaction_router.js";
 import Discord from "discord.js";
 import levenshtein from 'fast-levenshtein';
 const BEHAVIOR_NAME = "Ping";
@@ -49,12 +49,15 @@ const funny_messages = [
 var pong_responses = 0;
 function pong(message) {
     pong_responses += 1;
-    if (pong_responses == PONG_RESPONSE_TIMES) {
+    if (!DiscordInteractionRouter.request_action_on_message(message)) {
+        return;
+    }
+    if (pong_responses === PONG_RESPONSE_TIMES) {
         setTimeout(function() {
             pong_responses = 0;
         }, 1000 * PONG_RETURN_NORMAL_TIME);
     }
-    if (pong_responses == PONG_RESPONSE_EMOJI_TIMES) {
+    if (pong_responses === PONG_RESPONSE_EMOJI_TIMES) {
         message.channel.send("Okay, this is getting old...");
         setTimeout(function() {
             message.channel.send("I'm just going to react with 🏓 from now on to let you know I'm still alive.");
@@ -78,7 +81,7 @@ function pong(message) {
 
 if (Enabled) {
     console.log("Running Behavior: " + BEHAVIOR_NAME);
-    DiscordClient.on(Discord.Events.MessageCreate, (message) => {
+    DiscordInteractionRouter.register_message_create_event(1, (message) => {
         if (message.author.bot) {
             return;
         }
@@ -89,7 +92,6 @@ if (Enabled) {
         let distance = levenshtein.get(filtered_message, "ping");
         if (distance <= MAX_LEVENSHTEIN_DISTANCE) {
             pong(message);
-            return;
         }
     });
 }

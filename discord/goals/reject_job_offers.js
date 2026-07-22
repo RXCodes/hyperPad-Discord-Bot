@@ -362,17 +362,15 @@ function take_action(member, channel, message) {
 
 // ******************************************************************
 
-import { DiscordClient } from "../../foundation/discord_bot.js";
+import { DiscordInteractionRouter } from "../interaction_router.js";
 import { Colors, Helper } from "../helpers.js";
 import { HomoglyphMapHelper } from "../homoglyph_map.js";
-import Discord from "discord.js";
-const client_message_mapping = {};
 const GOAL_NAME = "Reject Job Offers";
 
 // as users send messages, track them in client_message_mapping
 if (Enforced) {
     console.log("Running Goal: " + GOAL_NAME);
-    DiscordClient.on(Discord.Events.MessageCreate, (message) => {
+    DiscordInteractionRouter.register_message_create_event(1, (message) => {
         if (message.content.length < MessageLengthThreshold) {
             return;
         }
@@ -398,7 +396,9 @@ if (Enforced) {
         // take action if flags exceeds set threshold
         if (flags_counted >= FlagThreshold) {
             try {
-                take_action(message.member, message.channel, message);
+                if (DiscordInteractionRouter.request_action_on_message(message)) {
+                    take_action(message.member, message.channel, message);
+                }
             } catch (e) {}
         }
     });

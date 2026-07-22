@@ -55,9 +55,8 @@ function take_action(message, filter) {
 
 // ******************************************************************
 
-import { DiscordClient } from "../../foundation/discord_bot.js";
+import { DiscordInteractionRouter } from "../interaction_router.js";
 import { Colors, Helper } from "../helpers.js";
-import Discord from "discord.js";
 import { Worker } from 'worker_threads';
 const GOAL_NAME = "Filter Content";
 var pending_messages = {};
@@ -70,7 +69,7 @@ if (Enforced) {
         type: "setup_filters",
         filters: Filters
     });
-    DiscordClient.on(Discord.Events.MessageCreate, (message) => {
+    DiscordInteractionRouter.register_message_create_event(1, (message) => {
         if (message.author.bot) {
             return;
         }
@@ -85,12 +84,14 @@ if (Enforced) {
     });
 
     worker.on("message", (message) => {
-        if (message.result == "detected") {
+        if (message.result === "detected") {
             console.log("Filter Detected Term: ", message.word);
             try {
-                take_action(pending_messages[message.message.id], message.filter);
+                if (DiscordInteractionRouter.request_action_on_message(message)) {
+                    take_action(pending_messages[message.message_id], message.filter);
+                }
             } catch (e) {}
         }
-        delete pending_messages[message.message.id];
+        delete pending_messages[message.message_id];
     });
 }
