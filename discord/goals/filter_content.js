@@ -69,7 +69,7 @@ if (Enforced) {
         type: "setup_filters",
         filters: Filters
     });
-    DiscordInteractionRouter.register_message_create_event(1, (message) => {
+    DiscordInteractionRouter.register_message_event(1, (message) => {
         if (message.author.bot) {
             return;
         }

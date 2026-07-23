@@ -4,12 +4,12 @@ import Discord from "discord.js";
 const registered_message_create_events = [];
 
 export const DiscordInteractionRouter = {
-    register_message_create_event,
+    register_message_event,
     request_action_on_message
 }
 
-// register an event with priority - highest priority executes first
-function register_message_create_event(priority, func) {
+// register a message event with priority - highest priority executes first
+function register_message_event(priority, func) {
     registered_message_create_events.push({
         call: func,
         priority: priority
@@ -34,11 +34,22 @@ function request_action_on_message(message) {
 
 // handle message create events
 DiscordClient.on(Discord.Events.MessageCreate, (message) => {
-    for (const event of registered_message_create_events) {
+    for (const event of register_message_event) {
         if (actioned_messages[message.id]) {
             delete actioned_messages[message.id];
             break;
         }
-        event.call(message);
+        event.call(message, Discord.Events.MessageCreate);
+    }
+});
+
+// treat edits as message create events
+DiscordClient.on(Discord.Events.MessageUpdate, (message) => {
+    for (const event of register_message_event) {
+        if (actioned_messages[message.id]) {
+            delete actioned_messages[message.id];
+            break;
+        }
+        event.call(message, Discord.Events.MessageUpdate);
     }
 });

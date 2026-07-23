@@ -110,7 +110,7 @@ const pending_messages = {};
 if (Enforced) {
     console.log("Running Goal: " + GOAL_NAME);
     const worker = new Worker('./discord/goals/goal_threads/reduce_toxicity_worker.js', {});
-    DiscordInteractionRouter.register_message_create_event(2, (message) => {
+    DiscordInteractionRouter.register_message_event(2, (message) => {
         if (message.author.bot) {
             return;
         }

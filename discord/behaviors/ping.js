@@ -23,6 +23,7 @@ const PONG_RETURN_NORMAL_TIME = 60 * 20;
 import { HomoglyphMapHelper } from "../homoglyph_map.js";
 import { DiscordInteractionRouter } from "../interaction_router.js";
 import levenshtein from 'fast-levenshtein';
+import Discord from "discord.js";
 const BEHAVIOR_NAME = "Ping";
 const funny_messages = [
     "I'm alive.",
@@ -79,7 +80,10 @@ function pong(message) {
 
 if (Enabled) {
     console.log("Running Behavior: " + BEHAVIOR_NAME);
-    DiscordInteractionRouter.register_message_create_event(1, (message) => {
+    DiscordInteractionRouter.register_message_event(1, (message, type) => {
+        if (type !== Discord.Events.MessageCreate) {
+            return;
+        }
         if (message.author.bot) {
             return;
         }

@@ -59,7 +59,7 @@ function refresh_message_mapping() {
 // as users send messages, track timestamps in client_last_timestamp
 if (Enforced) {
     console.log("Running Goal: " + GOAL_NAME);
-    DiscordInteractionRouter.register_message_create_event(5, (message) => {
+    DiscordInteractionRouter.register_message_event(5, (message) => {
         if (message.author.bot) {
             return;
         }

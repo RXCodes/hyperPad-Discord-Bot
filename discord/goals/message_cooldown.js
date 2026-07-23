@@ -45,7 +45,7 @@ function refresh_message_mapping() {
 // as users send messages, track them in client_message_mapping
 if (Enforced) {
     console.log("Running Goal: " + GOAL_NAME);
-    DiscordInteractionRouter.register_message_create_event(10, (message) => {
+    DiscordInteractionRouter.register_message_event(10, (message) => {
         if (message.author.bot) {
             return;
         }

@@ -58,7 +58,7 @@ class ContentMarker {
 // as users send messages, track them in client_message_mapping
 if (Enforced) {
     console.log("Running Goal: " + GOAL_NAME);
-    DiscordInteractionRouter.register_message_create_event(2, (message) => {
+    DiscordInteractionRouter.register_message_event(2, (message) => {
         if (message.author.bot) {
             return;
         }

@@ -370,7 +370,7 @@ const GOAL_NAME = "Reject Job Offers";
 // as users send messages, track them in client_message_mapping
 if (Enforced) {
     console.log("Running Goal: " + GOAL_NAME);
-    DiscordInteractionRouter.register_message_create_event(1, (message) => {
+    DiscordInteractionRouter.register_message_event(1, (message) => {
         if (message.content.length < MessageLengthThreshold) {
             return;
         }
