@@ -25,7 +25,7 @@ function take_action(member, channel) {
     client_last_messages[member.id] = [];
 
     // time out member for 5 minutes
-    member.timeout(1000 * 60 * 5, "You are sending too much content very quickly!")
+    Helper.timeout_member(member, 60 * 5, "You are sending too much content very quickly!");
 
     // log this action
     let user_mention = "<@" + member.id + ">";

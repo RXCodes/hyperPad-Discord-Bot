@@ -351,7 +351,7 @@ function take_action(member, channel, message) {
     message.delete();
 
     // time out member for 10 minutes
-    member.timeout(1000 * 60 * 10, "This server is not taking any applicants at the moment, and this is not the place to be hired.")
+    Helper.timeout_member(member,60 * 10, "This server is not taking any applicants at the moment, and this is not the place to send applications.");
 
     // log this action
     let user_mention = "<@" + member.id + ">";

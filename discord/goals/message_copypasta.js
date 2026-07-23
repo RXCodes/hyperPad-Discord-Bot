@@ -25,8 +25,8 @@ function take_action(member, channel, message) {
     Helper.delete_messages(client_message_mapping[member.id]);
     client_message_mapping[member.id] = [];
 
-    // time out member for 2 minutes
-    member.kick("You sent too many repetitive messages.");
+    // kick member
+    Helper.kick_member(member, "You sent too many repetitive messages.");
 
     // log this action
     let user_mention = "<@" + member.id + ">";

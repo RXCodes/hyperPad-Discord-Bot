@@ -5,7 +5,7 @@ import { HomoglyphMapHelper } from "../../homoglyph_map.js";
 
 parentPort.on('message', (message) => {
     // normalize the message before processing
-    const normalized_message = HomoglyphMapHelper.normalize_text(message.message.content);
+    const normalized_message = HomoglyphMapHelper.normalize_text(message.contents);
     const prediction_matches = {};
     const threshold_dictionary = message.thresholds;
 
@@ -18,7 +18,8 @@ parentPort.on('message', (message) => {
                 prediction_matches[prediction.label] = probability >= target_probability;
             });
             parentPort.postMessage({
-                message_id: message.message.id,
+                message_id: message.message_id,
+                type: message.type,
                 matches: prediction_matches
             })
         });

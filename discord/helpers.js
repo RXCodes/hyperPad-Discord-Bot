@@ -11,6 +11,8 @@ import {EmbedBuilder, PermissionsBitField} from "discord.js";
 export const Helper = {
     delete_messages,
     is_member_admin,
+    timeout_member,
+    kick_member,
     create_log,
     send_log
 }
@@ -24,7 +26,26 @@ export const Colors = {
 function delete_messages(messages) {
     for (const message of messages) {
         try {
-            message.delete();
+            if (message.deletable) {
+                message.delete();
+            }
+        } catch (error) {}
+    }
+}
+
+function timeout_member(member, timeout, reason) {
+    if (!process.env.TESTING) {
+        try {
+            // timeout is in milliseconds - multiply by 1000 to convert to seconds
+            member.timeout(timeout * 1000, reason);
+        } catch (error) {}
+    }
+}
+
+function kick_member(member, reason) {
+    if (!process.env.TESTING) {
+        try {
+            member.kick(reason);
         } catch (error) {}
     }
 }

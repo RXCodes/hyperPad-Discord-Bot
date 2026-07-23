@@ -12,9 +12,9 @@ function setup_filters(filters) {
     }
 }
 
-function ingest_message(message) {
+function ingest_message(content, type, id) {
     // normalize the text for analysis
-    let normalized_message = HomoglyphMapHelper.normalize_text(message.content);
+    let normalized_message = HomoglyphMapHelper.normalize_text(content);
 
     // go through all filters
     for (const filter_properties of Filters) {
@@ -29,7 +29,8 @@ function ingest_message(message) {
                     parentPort.postMessage({
                         result: 'detected',
                         filter: filter_properties,
-                        message_id: message.id,
+                        message_id: id,
+                        type: type,
                         word: blocked_word
                     });
                     return;
@@ -41,14 +42,15 @@ function ingest_message(message) {
                 parentPort.postMessage({
                     result: 'detected',
                     filter: filter_properties,
-                    message_id: message.id,
+                    message_id: id,
+                    type: type,
                     word: blocked_word
                 });
                 return;
             }
         }
     }
-    parentPort.postMessage({ result: 'clear', message: message });
+    parentPort.postMessage({ result: 'clear', type: type, message_id: id });
 }
 
 parentPort.on('message', (message) => {
@@ -57,6 +59,10 @@ parentPort.on('message', (message) => {
         return;
     }
     if (message.type === "ingest_message") {
-        ingest_message(message.message);
+        ingest_message(message.message.content, message.type, message.message.id);
+        return;
+    }
+    if (message.type === "ingest_message_chain") {
+        ingest_message(message.contents, message.type, message.message_id);
     }
 });

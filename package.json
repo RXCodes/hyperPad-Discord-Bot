@@ -18,6 +18,7 @@
     "express": "^5.0.0",
     "fast-levenshtein": "^3.0.0",
     "parallelizer-function": "^1.0.0",
-    "rita": "^2.8.31"
+    "rita": "^2.8.31",
+    "uuid": "^14.0.1"
   }
 }

@@ -81,12 +81,12 @@ function take_action(member, channel, message, offense) {
 
     // time out member for specified amount of time
     if (offense_action.timeoutTime > 0) {
-        member.timeout(1000 * offense_action.timeoutTime, offense_action.userReason);
+        Helper.timeout_member(member, offense_action.timeoutTime, offense_action.userReason);
     }
 
     // kick if specified
     if (offense_action.kick) {
-        member.kick(offense_action.userReason);
+        Helper.kick_member(member, offense_action.userReason);
     }
 
     // log this action
@@ -98,13 +98,42 @@ function take_action(member, channel, message, offense) {
     Helper.send_log(log, member.guild, channel);
 }
 
+// the action to take on a chain of messages that violates this goal
+function take_action_on_chain(messages, message_contents, member, offense) {
+    // delete the offending messages
+    Helper.delete_messages(messages);
+
+    // get the offense action
+    const offense_action = OffenseActions[offense];
+
+    // time out member for specified amount of time
+    if (offense_action.timeoutTime > 0) {
+        Helper.timeout_member(member, offense_action.timeoutTime, offense_action.userReason);
+    }
+
+    // kick if specified
+    if (offense_action.kick) {
+        Helper.kick_member(member, offense_action.userReason);
+    }
+
+    // log this action
+    let user_mention = "<@" + member.id + ">";
+    let contents = "**Content:**\n```" + message_contents + "```";
+    let description = offense_action.logDescription;
+    description = description.replace("[@USER]", user_mention);
+    let log = Helper.create_log(offense_action.logTitle, description + "\n\n" + contents, offense_action.color, member);
+    Helper.send_log(log, member.guild, messages[0].channel);
+}
+
 // ******************************************************************
 
 import { DiscordInteractionRouter } from "../interaction_router.js";
 import { Colors, Helper } from "../helpers.js";
 import { Worker } from "worker_threads";
+import { v4 as uuid4 } from "uuid";
 const GOAL_NAME = "Reduce Toxicity";
 const pending_messages = {};
+const pending_message_chains = {};
 
 // as users send messages, track them in client_message_mapping
 if (Enforced) {
@@ -123,7 +152,33 @@ if (Enforced) {
         pending_messages[message.id] = message;
         worker.postMessage({
             thresholds: ToxicityThresholds,
-            message
+            type: "ingest_message",
+            message_id: message.id,
+            contents: message.content
+        });
+    });
+
+    DiscordInteractionRouter.register_message_chain_event(2, (messages, member) => {
+        if (member.bot) {
+            return;
+        }
+        if (Helper.is_member_admin(member)) {
+            return;
+        }
+        let message_contents = [];
+        for (const message of messages) {
+            message_contents.push(message.content);
+        }
+        let full_message = message_contents.join("\n");
+        let id = uuid4();
+        pending_message_chains[id] = {
+            messages, member, full_message
+        };
+        worker.postMessage({
+            thresholds: ToxicityThresholds,
+            type: "ingest_message_chain",
+            contents: full_message,
+            message_id: id
         });
     });
 
@@ -139,22 +194,34 @@ if (Enforced) {
             "toxicity"
         ];
 
-        // get the discord message object
-        const discord_message = pending_messages[message.message_id];
-        delete pending_messages[message.message_id];
+        if (message.type === "ingest_message") {
+            const discord_message = pending_messages[message.message_id];
+            delete pending_messages[message.message_id];
 
-        // check for matches - take action based on highest offense
-        for (const offensive_label of ranked_offensive_labels) {
-            if (message.matches[offensive_label]) {
-                if (DiscordInteractionRouter.request_action_on_message(message)) {
-                    take_action(discord_message.member, discord_message.channel, discord_message, offensive_label);
+            // check for matches - take action based on highest offense
+            for (const offensive_label of ranked_offensive_labels) {
+                if (message.matches[offensive_label]) {
+                    if (DiscordInteractionRouter.request_action_on_message(discord_message)) {
+                        take_action(discord_message.member, discord_message.channel, discord_message, offensive_label);
+                    }
+                    return;
                 }
-                return;
             }
         }
-    });
 
-    DiscordInteractionRouter.register_message_chain_event(2, (messages, member) => {
+        if (message.type === "ingest_message_chain") {
+            const chain_data = pending_message_chains[message.message_id];
+            delete pending_message_chains[message.message_id];
 
+            // check for matches - take action based on highest offense
+            for (const offensive_label of ranked_offensive_labels) {
+                if (message.matches[offensive_label]) {
+                    if (DiscordInteractionRouter.request_action_on_message_chain(chain_data.messages)) {
+                        take_action_on_chain(chain_data.messages, chain_data.full_message, chain_data.member, offensive_label);
+                    }
+                    return;
+                }
+            }
+        }
     });
 }

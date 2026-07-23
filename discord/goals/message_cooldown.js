@@ -18,7 +18,7 @@ function take_action(member, channel) {
     client_message_mapping[member.id] = [];
 
     // time out member for 5 minutes
-    member.timeout(1000 * 60 * 5, "You are sending too many messages too fast!")
+    Helper.timeout_member(member, 60 * 5, "You are sending too many messages too fast!");
 
     // log this action
     let user_mention = "<@" + member.id + ">";
