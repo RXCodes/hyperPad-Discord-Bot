@@ -3,6 +3,7 @@ import Discord from "discord.js";
 
 const registered_message_events = [];
 const registered_message_chain_events = [];
+const registered_member_events = [];
 let cached_messages = [];
 let chains_updated = {};
 const CHAIN_MESSAGE_EXPIRATION_TIME = 30;
@@ -11,6 +12,7 @@ const CHAIN_MESSAGE_UPDATE_DELAY = 5;
 export const DiscordInteractionRouter = {
     register_message_event,
     register_message_chain_event,
+    register_member_event,
     request_action_on_message,
     request_action_on_message_chain
 }
@@ -26,13 +28,24 @@ function register_message_event(priority, func) {
     });
 }
 
-// register message chain events
+// register message chain events with priority - highest priority executes first
 function register_message_chain_event(priority, func) {
     registered_message_chain_events.push({
         call: func,
         priority: priority
     });
     registered_message_chain_events.sort(function(a, b) {
+        return b.priority - a.priority;
+    });
+}
+
+// register a member event with priority - highest priority executes first
+function register_member_event(priority, func) {
+    registered_member_events.push({
+        call: func,
+        priority: priority
+    });
+    registered_member_events.sort(function(a, b) {
         return b.priority - a.priority;
     });
 }
@@ -132,4 +145,18 @@ DiscordClient.on(Discord.Events.MessageUpdate, (message) => {
 DiscordClient.on(Discord.Events.MessageDelete, (message) => {
     cached_messages = cached_messages.filter(_message => _message.id !== message.id);
     update_cached_messages();
+});
+
+// detect when users join the server
+DiscordClient.on(Discord.Events.GuildMemberAdd, (member) => {
+    registered_member_events.forEach((event) => {
+        event.call(member, Discord.Events.GuildMemberAdd);
+    });
+});
+
+// detect when users leave the server
+DiscordClient.on(Discord.Events.GuildMemberRemove, (member) => {
+    registered_member_events.forEach((event) => {
+        event.call(member, Discord.Events.GuildMemberRemove);
+    });
 });
