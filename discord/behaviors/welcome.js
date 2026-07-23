@@ -11,7 +11,7 @@ const MAX_LEVENSHTEIN_DISTANCE = 2;
 const MAX_MESSAGE_LENGTH = 200;
 
 // how long to wait before this behavior can be triggered again (in seconds)
-const BEHAVIOR_COOLDOWN = 300;
+const BEHAVIOR_COOLDOWN = 120;
 
 // prefixes that the bot should respond to
 const DETECT_PREFIXES = [
@@ -141,8 +141,12 @@ import Discord from "discord.js";
 import { Worker } from "worker_threads";
 const BEHAVIOR_NAME = "Welcome";
 const pending_messages = {};
+let on_cooldown = false;
 
 function sayHello(channel) {
+    if (on_cooldown) {
+        return;
+    }
     let message = HelloMessages[Math.floor(Math.random() * HelloMessages.length)];
     let messages = message.split("\n");
     for (let i = 0; i < messages.length; i++) {
@@ -151,9 +155,16 @@ function sayHello(channel) {
             channel.send(messages[i]);
         }, time);
     }
+    on_cooldown = true;
+    setTimeout(function () {
+        on_cooldown = false;
+    }, 1000 * BEHAVIOR_COOLDOWN);
 }
 
 function questionablySayHello(channel) {
+    if (on_cooldown) {
+        return;
+    }
     let message = QuestionableHelloMessages[Math.floor(Math.random() * QuestionableHelloMessages.length)];
     let messages = message.split("\n");
     for (let i = 0; i < messages.length; i++) {
@@ -162,12 +173,16 @@ function questionablySayHello(channel) {
             channel.send(messages[i]);
         }, time);
     }
+    on_cooldown = true;
+    setTimeout(function () {
+        on_cooldown = false;
+    }, 1000 * BEHAVIOR_COOLDOWN);
 }
 
 if (Enabled) {
     console.log("Running Behavior: " + BEHAVIOR_NAME);
     const reduce_toxicity_worker = new Worker('./discord/workers/reduce_toxicity_worker.js', {});
-    DiscordInteractionRouter.register_message_event(1, (message, type) => {
+    DiscordInteractionRouter.register_message_event(100, (message, type) => {
         if (type !== Discord.Events.MessageCreate) {
             return;
         }
