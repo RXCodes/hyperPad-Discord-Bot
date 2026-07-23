@@ -21,6 +21,7 @@ const PONG_RETURN_NORMAL_TIME = 60 * 20;
 // ******************************************************************
 
 import { HomoglyphMapHelper } from "../homoglyph_map.js";
+import { SmartContains } from "../smart_contains.js";
 import { DiscordInteractionRouter } from "../interaction_router.js";
 import levenshtein from 'fast-levenshtein';
 import Discord from "discord.js";
@@ -71,8 +72,8 @@ function pong(message) {
         return;
     }
     if (pong_responses >= PONG_RESPONSE_TIMES) {
-        let index = Math.floor(Math.random() * (funny_messages.length - 1));
-        message.channel.send(funny_messages[index]);
+        let funny_message = funny_messages[Math.floor(Math.random() * funny_messages.length)];
+        message.channel.send(funny_message);
         return;
     }
     message.channel.send("Pong!");
@@ -87,7 +88,11 @@ if (Enabled) {
         if (message.author.bot) {
             return;
         }
+        if (message.content.length <= 3) {
+            return;
+        }
         let filtered_message = HomoglyphMapHelper.normalize_text(message.content);
+        filtered_message = SmartContains.shorten_character_chains_for_text(filtered_message);
         if (filtered_message.includes("pong")) {
             return;
         }

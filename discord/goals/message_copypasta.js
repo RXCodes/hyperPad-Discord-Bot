@@ -38,19 +38,25 @@ function take_action(member, channel, message) {
 // ******************************************************************
 
 import { Colors, Helper } from "../helpers.js";
+import { SmartContains } from "../smart_contains.js";
 import levenshtein from 'fast-levenshtein';
 import { DiscordInteractionRouter } from "../interaction_router.js";
+import { HomoglyphMapHelper } from "../homoglyph_map.js";
 const client_message_mapping = {};
 const GOAL_NAME = "Message Copypasta";
 class ContentMarker {
     constructor(message) {
-        this.message = message;
+        let content = HomoglyphMapHelper.normalize_homoglyphs(message.content);
+        content = SmartContains.shorten_character_chains_for_text(content);
+        this.content = content;
         this.similar_messages = [];
         this.messages_processed = 0;
     }
 
     is_similar_to_message(message) {
-        let result = levenshtein.get(message.content, this.message.content);
+        let content = HomoglyphMapHelper.normalize_homoglyphs(message.content);
+        content = SmartContains.shorten_character_chains_for_text(content);
+        let result = levenshtein.get(content, this.content);
         return result <= ThresholdLevenshteinDistance;
     }
 }

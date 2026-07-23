@@ -2,6 +2,7 @@
 import RiTa from 'rita';
 
 export const SmartContains = {
+    shorten_character_chains_for_text,
     tokens_are_similar,
     contains
 }
@@ -15,7 +16,7 @@ function tokens_are_similar(source_token, search_token) {
     }
 
     // shorten same character occurrences of 3 and longer
-    search_token = search_token.replace(/(.)\1{2,}/g, "$1$1");
+    search_token = shorten_character_chains_for_text(search_token);
 
     // ignore large tokens - user is probably just spamming anyway
     if (search_token.length > 20) {
@@ -103,4 +104,9 @@ function contains(normalized_text, subtext) {
         }
     }
     return false;
+}
+
+// shorten same character occurrences of 3 and longer
+function shorten_character_chains_for_text(text) {
+    return text.replace(/(.)\1{2,}/g, "$1$1");
 }

@@ -192,7 +192,7 @@ if (Enabled) {
             return;
         }
         let filtered_message = HomoglyphMapHelper.normalize_text(message.content);
-        filtered_message = filtered_message.replace(/(.)\1{2,}/g, "$1$1");
+        filtered_message = SmartContains.shorten_character_chains_for_text(filtered_message);
 
         let match_found = false;
         for (const prefix of DETECT_PREFIXES) {

@@ -365,6 +365,7 @@ function take_action(member, channel, message) {
 import { DiscordInteractionRouter } from "../interaction_router.js";
 import { Colors, Helper } from "../helpers.js";
 import { HomoglyphMapHelper } from "../homoglyph_map.js";
+import { SmartContains } from "../smart_contains.js";
 const GOAL_NAME = "Reject Job Offers";
 
 // as users send messages, track them in client_message_mapping
@@ -382,7 +383,8 @@ if (Enforced) {
         }
 
         // normalize the text for analysis
-        const normalized_message = HomoglyphMapHelper.normalize_text(message.content);
+        let normalized_message = HomoglyphMapHelper.normalize_text(message.content);
+        normalized_message = SmartContains.shorten_character_chains_for_text(normalized_message);
 
         // search for flags
         let flags_counted = 0;
